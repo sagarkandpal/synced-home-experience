@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Edit3, Pencil, RefreshCw, ShieldCheck } from "lucide-react";
+import { Pencil, RefreshCw, ShieldCheck } from "lucide-react";
 import { useSmartHome } from "@/context/SmartHomeContext";
 import { RoomScene } from "@/RoomScene";
 import { relayIcons } from "@/lib/smart-home-icons";
@@ -182,35 +182,60 @@ const DevicesSection = () => {
         </div>
 
         <div className="space-y-6">
-          <div className="device-house tilt-card relative rounded-[32px] overflow-hidden perspective-1200 h-[600px] xl:h-[700px]" style={{ boxShadow: "var(--shadow-lg)" }}>
-            <div className="absolute inset-0 z-0">
-               <RoomScene modelUrl="" />
-            </div>
-            <div className="absolute inset-0 rounded-[32px] pointer-events-none" style={{ background: "linear-gradient(180deg, transparent 50%, rgba(10,16,24,0.95) 100%)" }} />
-            <div className="absolute bottom-6 left-6 right-6 z-10 pointer-events-none">
-              <div className="text-accent text-[11px] font-extrabold tracking-[0.18em] uppercase mb-2">Live Topic Base</div>
-              <div className="text-foreground text-xl font-bold break-all">{currentTopic}</div>
-              <div className="text-muted-foreground text-sm mt-2">
-                Relay topics: `{currentTopic}/relay/1` to `{currentTopic}/relay/4`<br/>
-                PIR topic: `{currentTopic}/pir`
-              </div>
-            </div>
-          </div>
+          {/* Glow halo wrapper — outside overflow-hidden so halos bleed beyond the card */}
+          <div className="relative">
 
-          <div className="dev-banner tilt-card rounded-[30px] p-6" style={{
-            background: "linear-gradient(180deg, rgba(200,210,240,0.08), rgba(200,210,240,0.03)), linear-gradient(145deg, rgba(10,14,28,0.82) 0%, rgba(18,24,46,0.74) 54%, rgba(22,30,56,0.84) 100%)",
-            border: "1px solid rgba(200,210,240,0.1)",
-            boxShadow: "var(--shadow-lg)",
-          }}>
-            <div className="flex items-center gap-3 mb-4">
-              <Edit3 className="w-5 h-5 text-accent" />
-              <div className="text-foreground text-lg font-bold">What was restored</div>
-            </div>
-            <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-              <p>Relay state publishing with retained MQTT messages.</p>
-              <p>Saved broker/device profiles using local storage.</p>
-              <p>Rename and icon customization for all four relays.</p>
-              <p>Manual refresh, disconnect, PIR toggle, and live activity logging.</p>
+            {/* Layer 1 — primary blue center glow */}
+            <div className="absolute -inset-6 rounded-[50px] pointer-events-none" style={{
+              background: "radial-gradient(ellipse at 50% 50%, rgba(55, 105, 230, 0.32) 0%, rgba(60, 90, 210, 0.18) 42%, transparent 70%)",
+              filter: "blur(52px)",
+            }} />
+            {/* Layer 2 — violet accent, offset upper-right */}
+            <div className="absolute -inset-10 rounded-[58px] pointer-events-none" style={{
+              background: "radial-gradient(ellipse at 65% 35%, rgba(100, 60, 220, 0.20) 0%, transparent 56%)",
+              filter: "blur(76px)",
+            }} />
+            {/* Layer 3 — deep indigo outer halo */}
+            <div className="absolute -inset-16 rounded-[66px] pointer-events-none" style={{
+              background: "radial-gradient(ellipse at 40% 62%, rgba(28, 55, 170, 0.15) 0%, transparent 52%)",
+              filter: "blur(100px)",
+            }} />
+
+            <div
+              className="device-house tilt-card relative rounded-[32px] overflow-hidden perspective-1200 h-[560px] xl:h-[660px]"
+              style={{
+                boxShadow: [
+                  "0 0 0 1px rgba(90, 140, 255, 0.10)",
+                  "0 0 30px rgba(45, 85, 210, 0.22)",
+                  "0 0 80px rgba(25, 55, 165, 0.16)",
+                  "0 32px 80px rgba(0, 0, 0, 0.70)",
+                ].join(", "),
+              }}
+            >
+              <div className="absolute inset-0 z-0">
+                <RoomScene />
+              </div>
+
+              {/* Inner vignette — soft edge darkening for depth */}
+              <div className="absolute inset-0 rounded-[32px] pointer-events-none" style={{
+                background: [
+                  "radial-gradient(ellipse at 50% 50%, transparent 42%, rgba(4, 8, 22, 0.50) 100%)",
+                  "linear-gradient(180deg, rgba(4,8,22,0.14) 0%, transparent 22%, transparent 70%, rgba(4,8,22,0.42) 100%)",
+                ].join(", "),
+              }} />
+
+              {/* Top shimmer accent line */}
+              <div className="absolute top-0 left-[18%] right-[18%] h-px pointer-events-none" style={{
+                background: "linear-gradient(90deg, transparent 0%, rgba(130, 180, 255, 0.50) 50%, transparent 100%)",
+              }} />
+
+              {/* Subtle corner glints */}
+              <div className="absolute top-0 left-0 w-24 h-24 rounded-tl-[32px] pointer-events-none" style={{
+                background: "radial-gradient(ellipse at 0% 0%, rgba(100, 150, 255, 0.10) 0%, transparent 70%)",
+              }} />
+              <div className="absolute top-0 right-0 w-24 h-24 rounded-tr-[32px] pointer-events-none" style={{
+                background: "radial-gradient(ellipse at 100% 0%, rgba(120, 80, 240, 0.08) 0%, transparent 70%)",
+              }} />
             </div>
           </div>
         </div>

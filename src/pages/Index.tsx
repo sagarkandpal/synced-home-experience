@@ -27,9 +27,9 @@ const Index = () => {
 
       <Navbar />
       <HeroSection />
-      <FeaturesSection />
       <DevicesSection />
       <ExperienceSection />
+      <FeaturesSection />
       <FooterCTA />
     </div>
   );

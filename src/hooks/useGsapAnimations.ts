@@ -94,7 +94,7 @@ const useGsapAnimations = (loaded: boolean) => {
       gsap.fromTo(".device-house",
         { y: 40, opacity: 0, scale: 0.95 },
         { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power3.out",
-          scrollTrigger: { trigger: "#devices", start: "top 60%" } }
+          scrollTrigger: { trigger: "#devices", start: "top 80%" } }
       );
 
       // Experience section
