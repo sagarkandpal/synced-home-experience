@@ -306,9 +306,9 @@ export const SmartHomeProvider = ({ children }: { children: ReactNode }) => {
   const toggleRelay = useCallback(
     (relayId: number) => {
       setRelays((prev) => {
-        const next = prev.map((relay) =>
+        const next: RelayItem[] = prev.map((relay) =>
           relay.id === relayId
-            ? { ...relay, status: relay.status === "on" ? "off" : "on" }
+            ? { ...relay, status: (relay.status === "on" ? "off" : "on") as RelayStatus }
             : relay,
         );
 
